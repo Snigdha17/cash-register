@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+}
+
+#cash-given-area {
+  display: none;
+}
+
+#error-message {
+  display: none;
+}
