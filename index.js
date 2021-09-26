@@ -1,13 +1,13 @@
-const billAmount = document.querySelector("#bill-amount");
 const checkButton = document.querySelector("#check-button");
 const nextButton = document.querySelector("#next-button");
-const cashGiven = document.querySelector("#cash-given");
 const cashGivenArea = document.querySelector("#cash-given-area");
 const errorMessage = document.querySelector("#error-message");
 const numberOfNotesDisplayArea = document.querySelectorAll(".noOfNotes");
 const availableNotes = [2000, 500, 100, 20, 10, 5, 1];
-
+const cashReturned = document.querySelector("#cash-returned");
 function nextButtonOnClickHandler() {
+  var billAmount = document.querySelector("#bill-amount");
+
   hideMessage();
   const billAmountValue = Number(billAmount.value);
   if (!Number.isInteger(billAmountValue)) {
@@ -30,6 +30,9 @@ function calculateChange(amountToBeReturned) {
 
 function checkButtonOnClickHandler() {
   hideMessage();
+  var billAmount = document.querySelector("#bill-amount");
+  var cashGiven = document.querySelector("#cash-given");
+
   const billAmountValue = Number(billAmount.value);
   const cashGivenValue = Number(cashGiven.value);
 
@@ -37,6 +40,7 @@ function checkButtonOnClickHandler() {
     showMessage("Cash Given should be a number");
   } else if (cashGivenValue >= billAmountValue) {
     const amountToBeReturned = cashGivenValue - billAmountValue;
+    cashReturned.innerText = `Cash to be returned: ₹${amountToBeReturned}`;
     calculateChange(amountToBeReturned);
   } else {
     showMessage(
@@ -48,10 +52,12 @@ function checkButtonOnClickHandler() {
 function showMessage(message) {
   errorMessage.style.display = "block";
   errorMessage.innerText = message;
+  errorMessage.style.color = "red";
 }
 
 function hideMessage() {
   errorMessage.style.display = "none";
+  cashReturned.innerText = "";
 }
 
 function hideCashGivenInputArea() {
