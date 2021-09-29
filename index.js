@@ -40,8 +40,13 @@ function checkButtonOnClickHandler() {
     showMessage("Cash Given should be a number");
   } else if (cashGivenValue >= billAmountValue) {
     const amountToBeReturned = cashGivenValue - billAmountValue;
-    cashReturned.innerText = `Cash to be returned: ₹${amountToBeReturned}`;
-    calculateChange(amountToBeReturned);
+    if (amountToBeReturned === 0) {
+      cashReturned.innerText =
+        "Customer gave exact amount. Nothing to be returned";
+    } else {
+      cashReturned.innerText = `Cash to be returned: ₹${amountToBeReturned}`;
+      calculateChange(amountToBeReturned);
+    }
   } else {
     showMessage(
       "Cash provided should be equal to or greater than the bill amount"
